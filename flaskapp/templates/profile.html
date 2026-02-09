@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head><title>Profile</title></head>
+<body>
+  <h2>Profile: {{ user.username }}</h2>
+
+  <h3>Stored Details</h3>
+  <p><b>First name:</b> {{ user.firstname }}</p>
+  <p><b>Last name:</b> {{ user.lastname }}</p>
+  <p><b>Email:</b> {{ user.email }}</p>
+  <p><b>Address:</b> {{ user.address }}</p>
+
+  <hr>
+
+  <h3>Upload Limerick.txt</h3>
+  <form method="POST" action="/upload/{{ user.username }}" enctype="multipart/form-data">
+    <input type="file" name="file" accept=".txt" required>
+    <button type="submit">Upload</button>
+  </form>
+
+  {% if user.uploaded_filename %}
+    <p><b>Word count:</b> {{ user.uploaded_wordcount }}</p>
+    <a href="/download/{{ user.username }}">Download file</a>
+  {% endif %}
+
+  <hr>
+  <p><a href="/login">Re-login</a></p>
+</body>
+</html>
